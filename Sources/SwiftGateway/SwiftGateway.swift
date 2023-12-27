@@ -1,4 +1,7 @@
 import Foundation
+#if canImport(UIKit)
+import UIKit
+#endif
 
 public enum GatewayServiceAuthType: String {
     case header = "HEADER"
@@ -13,6 +16,8 @@ public extension URLRequest {
     init?(
         gateway: URL,
         url: URL,
+        serviceName: String?,
+        serviceId: String?,
         token: String?,
         authenticationType: GatewayServiceAuthType?,
         authenticationKey: String?,
@@ -45,6 +50,24 @@ public extension URLRequest {
 
         if let authenticationKey {
             self.setValue(authenticationKey, forHTTPHeaderField: "x-gateway-service-auth-key")
+        }
+
+#if canImport(UIKit)
+        if let user = UIDevice.current.identifierForVendor?.uuidString {
+            self.setValue(user, forHTTPHeaderField: "x-gateway-identifier-for-vendor")
+        }
+#endif
+
+        if let serviceId {
+            self.setValue(serviceId, forHTTPHeaderField: "x-gateway-service-id")
+        }
+
+        if let serviceName {
+            self.setValue(serviceName, forHTTPHeaderField: "x-gateway-service-name")
+        }
+
+        if let bundle = Bundle.main.bundleIdentifier {
+            self.setValue(bundle, forHTTPHeaderField: "x-gateway-bundle-identifier")
         }
 
         self.setValue(host, forHTTPHeaderField: "x-gateway-service-host")

@@ -7,6 +7,8 @@ final class SwiftGatewayTests: XCTestCase {
             URLRequest(
                 gateway: URL(string: "https://gateway.netutils.workers.dev")!,
                 url: URL(string: "https://api.openai.com/v1/models")!,
+                serviceName: nil,
+                serviceId: nil,
                 token: nil,
                 authenticationType: .header,
                 authenticationKey: nil
