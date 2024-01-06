@@ -70,6 +70,10 @@ public extension URLRequest {
             self.setValue(bundle, forHTTPHeaderField: "x-gateway-bundle-identifier")
         }
 
+        if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
+            self.setValue(version, forHTTPHeaderField: "x-gateway-bundle-version")
+        }
+
         self.setValue(host, forHTTPHeaderField: "x-gateway-service-host")
     }
 }
