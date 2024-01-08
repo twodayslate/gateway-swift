@@ -21,6 +21,7 @@ public extension URLRequest {
         token: String?,
         authenticationType: GatewayServiceAuthType?,
         authenticationKey: String?,
+        authenticationPrefix: String?,
         cachePolicy: URLRequest.CachePolicy = .useProtocolCachePolicy,
         timeoutInterval: TimeInterval = 60
     ) {
@@ -50,6 +51,10 @@ public extension URLRequest {
 
         if let authenticationKey {
             self.setValue(authenticationKey, forHTTPHeaderField: "x-gateway-service-auth-key")
+        }
+
+        if let authenticationPrefix {
+            self.setValue(authenticationPrefix, forHTTPHeaderField: "x-gateway-service-auth-prefix")
         }
 
 #if canImport(UIKit)

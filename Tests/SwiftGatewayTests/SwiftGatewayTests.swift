@@ -11,7 +11,8 @@ final class SwiftGatewayTests: XCTestCase {
                 serviceId: nil,
                 token: nil,
                 authenticationType: .header,
-                authenticationKey: nil
+                authenticationKey: nil,
+                authenticationPrefix: nil
             )
         )
 
